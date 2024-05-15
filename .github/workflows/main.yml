@@ -1,0 +1,42 @@
+name: Build and Publish to Dockerhub
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  dotnet_build:
+    runs-on: windows-latest
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@main
+
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Clean solution
+      run: dotnet clean "./HelloWorld"
+
+    - name: Restore solution
+      run: dotnet restore "./HelloWorld"
+
+    - name: Build project
+      run: dotnet build "./HelloWorld" --configuration Release
+
+  docker_build_and_publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@main
+
+    - name: Build image
+      run: docker build . -t julioschuambach/hello-world-api:latest
+
+    - name: Publish image
+      run: docker login -u julioschuambach -p ${{ secrets.DOCKER_TOKEN }}
+           docker push julioschuambach/hello-world-api:latest
