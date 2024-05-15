@@ -31,7 +31,6 @@ jobs:
       uses: actions/upload-artifact@v3.1.0
       with:
         name: hello-world-api-artifact
-        path: .
 
   docker_build_and_publish:
     needs: dotnet_build
@@ -45,7 +44,6 @@ jobs:
       uses: actions/download-artifact@v3.0.0
       with:
         name: hello-world-api-artifact
-        path: .
 
     - name: Build image
       run: docker build . -t julioschuambach/hello-world-api:latest
