@@ -51,6 +51,8 @@ jobs:
     - name: Build image
       run: docker build "./HelloWorld/HelloWorld.Api" -t julioschuambach/hello-world-api:latest
 
-    - name: Publish image
+    - name: Login in Docker registry
       run: docker login -u julioschuambach -p ${{ secrets.DOCKER_TOKEN }}
-           #docker push julioschuambach/hello-world-api:latest
+
+    - name: Publish image
+      run: docker push julioschuambach/hello-world-api:latest
