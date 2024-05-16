@@ -49,7 +49,7 @@ jobs:
         path: build
 
     - name: Build image
-      run: docker build . -t julioschuambach/hello-world-api:latest
+      run: docker build "./HelloWorld/HelloWorld.Api" -t julioschuambach/hello-world-api:latest
 
     - name: Publish image
       run: docker login -u julioschuambach -p ${{ secrets.DOCKER_TOKEN }}
