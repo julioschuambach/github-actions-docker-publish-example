@@ -53,4 +53,4 @@ jobs:
 
     - name: Publish image
       run: docker login -u julioschuambach -p ${{ secrets.DOCKER_TOKEN }}
-           docker push julioschuambach/hello-world-api:latest
+           #docker push julioschuambach/hello-world-api:latest
