@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - development
 
 jobs:
   dotnet_build:
@@ -45,10 +46,13 @@ jobs:
       uses: actions/download-artifact@v3.0.0
       with:
         name: hello-world-api-artifact
+        path: build
 
     - name: Build image
-      run: docker build . -t julioschuambach/hello-world-api:latest
+      run: docker build "./HelloWorld/HelloWorld.Api" -t julioschuambach/hello-world-api:latest
+
+    - name: Login in Docker registry
+      run: docker login -u julioschuambach -p ${{ secrets.DOCKER_TOKEN }}
 
     - name: Publish image
-      run: docker login -u julioschuambach -p ${{ secrets.DOCKER_TOKEN }}
-           docker push julioschuambach/hello-world-api:latest
+      run: docker push julioschuambach/hello-world-api:latest
