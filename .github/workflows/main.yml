@@ -4,10 +4,11 @@ on:
   push:
     branches:
       - main
+      - development
 
 jobs:
+  runs-on: windows-latest
   dotnet_build:
-    runs-on: windows-latest
 
     steps:
     - name: checkout
@@ -35,7 +36,6 @@ jobs:
 
   docker_build_and_publish:
     needs: dotnet_build
-    runs-on: ubuntu-latest
 
     steps:
     - name: checkout
