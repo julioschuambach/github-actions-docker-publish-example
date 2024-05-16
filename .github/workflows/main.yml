@@ -32,7 +32,7 @@ jobs:
       uses: actions/upload-artifact@v3.1.0
       with:
         name: hello-world-api-artifact
-        path: HelloWorld.Api.dll
+        path: ./HelloWorld/HelloWorld.Api.dll
 
   docker_build_and_publish:
     needs: dotnet_build
